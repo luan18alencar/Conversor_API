@@ -45,3 +45,12 @@ function convertCurrency(event) {
         }
     });
 }
+// Função para resetar o formulário e o resultado
+function resetForm() {
+    form.reset(); // redefine o formulário para os valores iniciais
+    resultDiv.innerHTML = ''; // limpa o resultado mostrado na tela
+}
+
+// Adicionando os event listeners para o submit do formulário e o botão de reset
+form.addEventListener('submit', convertCurrency); // adiciona evento para que quando o usuário clicar em enviar a função convetCurrency seja executada
+resetButton.addEventListener('click', resetForm); // adiciona evento para que quando o usúario clicar no botão de reset o formulário execute a função resetForm
