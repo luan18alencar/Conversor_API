@@ -19,5 +19,29 @@ function getConversionRate(from, to) {
             console.error('Erro ao buscar dados da API:', error);
             resultDiv.innerHTML = 'Erro ao buscar dados da conversão. Tente novamente mais tarde.';
         }); // esse campo serve para relatar caso ocorra algum erro quando o código for se comucar com a API, caso ocorra o erro ele armazena o mesmo no campo catch e após exibira o erro na tela
-        
+
+}
+
+// Função para realizar a conversão
+function convertCurrency(event) {
+    event.preventDefault(); // Evitar que a página seja recarregada ao enviar o formulário
+
+    const amount = parseFloat(amountInput.value); // Verifica o valor mandado pelo usuário se é positivo e numérico caso seja inválido é exibida uma mensagem de erro
+    const from = fromCurrency.value; // Moeda de origem
+    const to = toCurrency.value; // Moeda de destino
+
+    if (isNaN(amount) || amount <= 0) {
+        resultDiv.innerHTML = 'Por favor, insira um valor válido.';
+        return;
+    } // mensagem de erro da const amont
+
+    // caso o valor enviado pelo usuário seja valido:
+
+    // Chama a função para obter a taxa de conversão
+    getConversionRate(from, to).then(rate => {
+        if (rate) {
+            const convertedAmount = (amount * rate).toFixed(2); // Faz o cálculo da conversão. Usando o valor de amont e multiplicando o valor pela taxa rate e o resultado é arredondado para duas casas decimais com .toFixed(2)
+            resultDiv.innerHTML = `<p>${amount} ${from} = ${convertedAmount} ${to}</p>`; // exibe o valor obtido
+        }
+    });
 }
