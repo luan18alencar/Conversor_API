@@ -13,6 +13,8 @@
 # Pegando A URL da API
 
     Antes de começar o código você deve ter acesso a API do site "Awesome-API". 
-
+    
 ![imagem-da-api](img/AW.png)
+
+
 
