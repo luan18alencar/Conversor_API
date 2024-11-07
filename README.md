@@ -10,7 +10,15 @@
 
 ## Pegando A URL da API
 
-    Antes de começar o código você deve ter acesso a API do site "Awesome-API". 
+    Antes de começar o código você deve ter acesso a API do site "ExchangeRate-API" . 
+
+## Passo A Passo
+
+    Faça login ou cadastre-se no site.
+
+    Após o Cadastro, pegue a Api do Site e coloque no código do JavaScript
+
+    
 
 ![imagem-da-api](img/AW.png)
 
@@ -74,6 +82,26 @@
 |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/140835172?v=4 " width=115><br><sub>Luan Alencar</sub>](https://github.com/luan18alencar) |  
 | :---: |
 
+## Colaboradores:
+
+|  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/140835172?v=4 " width=115><br><sub>Fellipe Gabriel</sub>](https://github.com/Fell1pe) |  
+| :---: |
+
+
+ 
+ 
+ 
+## Fontes consultadas
+* [Alura - Como escrever um bom README.md](https://www.alura.com.br/artigos/escrever-bom-readme)
+* [Bootstrap](https://getbootstrap.com/docs/5.3/forms/checks-radios/#radios)
+* [Alura - Tipos de type](https://cursos.alura.com.br/forum/topico-type-do-campo-telefone-104370)
+* [Dio](https://www.dio.me/articles/tutorial-criando-um-readme-bonitao-para-o-seu-github)
+* [Progamador alternativo - Youtube](https://youtu.be/HJ16WEmOWTw?si=UFvCAtBHbuCc08Hu)
+* [Fotos para o subtópico "Técnicas e tecnologias consultadas"](https://github.com/alexandresanlim/Badges4-README.md-Profile)
+* [Youtube - TELA DE LOGIN COM TEMA DARK | HTML + CSS](https://youtu.be/69-WfrVBli8?si=GGultNVszQg0wDUK)
+* [HomeHost](https://www.homehost.com.br/blog/tutoriais/html-buttton/)
+* [W3schools](https://www.w3schools.com/js/js_window_location.asp)
+* [trabalho anterior](https://github.com/luan18alencar/Conversor_Simples)
 
 
 
