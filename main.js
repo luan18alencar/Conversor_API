@@ -8,7 +8,7 @@ const resetButton = document.getElementById('reset'); // cria const para botão 
 
 // Função para fazer a requisição à API e obter a taxa de câmbio
 function getConversionRate(from, to) {
-    const url = `https://economia.awesomeapi.com.br/last/${from}-${to}`; // URL da API: A URL da API é formatada dinamicamente com as moedas selecionadas (from e to). Por exemplo, se o usuário selecionar "USD" para "from" e "BRL" para "to", a URL será: https://economia.awesomeapi.com.br/last/USD-BRL.
+    const url = `https://economia.awesomeapi.com.br/last/${from}-${to}`; // URL da API: A URL da API é formatada dinamicamente com as moedas selecionadas (from e to). Por exemplo, se o usuário selecionar "USD" para "from" e "BRL para "to", a URL será: https://economia.awesomeapi.com.br/last/USD-BRL.
     return fetch(url) //cria um fetch na url sendo resolvido apenas quando a url retorna um valor ao fetch
         .then(response => response.json())
         .then(data => {
