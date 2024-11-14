@@ -13,12 +13,7 @@
     Antes de começar o código você deve ter acesso a API do site "ExchangeRate-API" . 
 
 ## Passo A Passo
-
-    Faça login ou cadastre-se no site.
-
-    Após o Cadastro, pegue a Api do Site e coloque no código do JavaScript
-
-    
+pegue a Api do Site e coloque no código do JavaScript
 
 ![imagem-da-api](img/AW.png)
 
@@ -42,7 +37,8 @@
     *Selecione as moedas*: Escolha a moeda de origem e a moeda de destino nos menus dropdowns.
     Insira o valor: Digite o valor que deseja converter.
     Clique em "Converter": O resultado será exibido instantaneamente.
-
+    Clique em "resetar" para resetar o valor.
+    
 
 
 ### Arquitetura:
@@ -54,20 +50,18 @@
 
 ## HTML
 
-![gif](img/IMAGEM.gif)
+![gif](img/IMAGE1.gif)
 
 ## CSS
 
-![gif](img/immg.gif)
+![gif](img/IMAGE2.gif)
 
 ## JavaScript
 
-![gif](img/jva.gif)
+![gif](img/IMAGE0.gif)
 
 
 ## Tecnologias utilizadas:
-
-
 
 * API:  https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL
  
