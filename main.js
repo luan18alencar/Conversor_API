@@ -1,42 +1,56 @@
-const apiKey = "8c9eef8469cb71cb3974e9fe"; //Chave de acesso à API de taxas de câmbio.
-const apiURL = "https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD";  //URL da API, utilizando a chave para construir a requisição
+// Selecionando os elementos do formulário e da página
+const form = document.getElementById('currency-form'); // cria const para o formulário
+const amountInput = document.getElementById('amount'); // cria const para campo onde o usuário insere o valor para conversão
+const fromCurrency = document.getElementById('from-currency'); // cria const para armazenar moeda de origem para conversão
+const toCurrency = document.getElementById('to-currency'); // cria const para armazenar moeda de destino
+const resultDiv = document.getElementById('result'); // cria const para onde o resultado será exibido
+const resetButton = document.getElementById('reset'); // cria const para botão que limpa o formulário
 
-// Função para buscar taxa de câmbio via API 
-async function getExchangeRate(daMoeda, paraMoeda) {// Código da moeda de origem (moeda que será convertida).
-    //Código da moeda de destino (moeda para a qual a conversão será realizada).
-    try{ 
-        const response = await fetch(`${apiUrl}${daMoeda}`);
-        //Faz a requisição usando fetch para obter a resposta da API.
-        const data = await response.json(); 
-        //Converte a resposta para JSON usando await response.json().
-        if(data.result === "success"){   
-            return data.conversion_rates[paraMoeda]; 
-         //Verifica se a propriedade result da resposta é igual a "success" (sucesso na requisição).
-        }else{ 
-            throw new Error('Erro ao buscar as taxas de câmbio'); 
-        //Se for sucesso, retorna a taxa de câmbio para a moeda de destino (data.conversion_rates[paraMoeda]).
-        } 
-    }catch(error){ 
-        //Registra o erro no console (console.error).
-        console.error("Erro:", error); 
-        return null; 
-        //Caso Erro
-        //Retorna null para indicar que a taxa de câmbio não foi obtida.
-    } 
- }; 
- document.getElementById("currency-form").addEventListener('submit', async function(event){ 
-    event.preventDefault(); 
-    //Ao clicar no botão de submit do formulário, a função dentro do event listener é executada.
-    const valor = parseFloat(document.getElementById('amount').value); 
+// Função para fazer a requisição à API e obter a taxa de câmbio
+function getConversionRate(from, to) {
+    const url = `https://economia.awesomeapi.com.br/last/${from}-${to}`; // URL da API: A URL da API é formatada dinamicamente com as moedas selecionadas (from e to). Por exemplo, se o usuário selecionar "USD" para "from" e "BRL" para "to", a URL será: https://economia.awesomeapi.com.br/last/USD-BRL.
+    return fetch(url) //cria um fetch na url sendo resolvido apenas quando a url retorna um valor ao fetch
+        .then(response => response.json())
+        .then(data => {
+            // O nome do par de moedas será no formato "FROMTO" (ex: USDBRL, EURUSD)
+            const conversionKey = `${from}${to}`; // cria const puxando propiedades da url from=de to=para (representado como a junção das moedas ex: USDBRL)
+            return data[conversionKey].bid; // agora o campo acessa a função bid que representa o valor de cotação da moeda de origem em relação a moeda de destino
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados da API:', error);
+            resultDiv.innerHTML = 'Erro ao buscar dados da conversão. Tente novamente mais tarde.';
+        }); // esse campo serve para relatar caso ocorra algum erro quando o código for se comucar com a API, caso ocorra o erro ele armazena o mesmo no campo catch e após exibira o erro na tela
+}
+// Função para realizar a conversão
+function convertCurrency(event) {
+    event.preventDefault(); // Evitar que a página seja recarregada ao enviar o formulário
 
-    const daMoeda = document.getElementById('daMoeda').value; 
-    const paraMoeda = document.getElementById('paraMoeda').value; 
-    const exchangeRate = await getExchangeRate(daMoeda, paraMoeda); //Chama a função getExchangeRate para obter a taxa de câmbio, passando os valores de daMoeda e paraMoeda.
-    if(exchangeRate){ //Faz uma requisição à API para obter a taxa de câmbio entre as moedas especificadas.
-        const convertedValue = valor * exchangeRate; // Se a taxa de câmbio for válida (exchangeRate), calcula o valor convertido
-        const conversao = document.getElementById('result');// Atualiza o elemento de exibição do resultado (const conversao = document.getElementById('result')) com o valor convertido formatado com duas casas decimais e a moeda de destino (conversao.textContent = ...).
-        conversao.textContent = `Resultado: ${convertedValue.toFixed(2)} ${paraMoeda}`; 
-    }else{ 
-        alert('Não foi possível buscar o valor da cotação!'); 
-    } 
- });
+    const amount = parseFloat(amountInput.value); // Verifica o valor mandado pelo usuário se é positivo e numérico caso seja inválido é exibida uma mensagem de erro
+    const from = fromCurrency.value; // Moeda de origem
+    const to = toCurrency.value; // Moeda de destino
+
+    if (isNaN(amount) || amount <= 0) {
+        resultDiv.innerHTML = 'Por favor, insira um valor válido.';
+        return;
+    } // mensagem de erro da const amont
+
+    // caso o valor enviado pelo usuário seja valido:
+
+    // Chama a função para obter a taxa de conversão
+    getConversionRate(from, to).then(rate => {
+        if (rate) {
+            const convertedAmount = (amount * rate).toFixed(2); // Faz o cálculo da conversão. Usando o valor de amont e multiplicando o valor pela taxa rate e o resultado é arredondado para duas casas decimais com .toFixed(2)
+            resultDiv.innerHTML = `<p>${amount} ${from} = ${convertedAmount} ${to}</p>`; // exibe o valor obtido
+        }
+    });
+}
+
+// Função para resetar o formulário e o resultado
+function resetForm() {
+    form.reset(); // redefine o formulário para os valores iniciais
+    resultDiv.innerHTML = ''; // limpa o resultado mostrado na tela
+}
+
+// Adicionando os event listeners para o submit do formulário e o botão de reset
+form.addEventListener('submit', convertCurrency); // adiciona evento para que quando o usuário clicar em enviar a função convetCurrency seja executada
+resetButton.addEventListener('click', resetForm); // adiciona evento para que quando o usúario clicar no botão de reset o formulário execute a função resetForm
